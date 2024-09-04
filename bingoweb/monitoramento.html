@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Cartelas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monitoramento de Cartelas</h1>
+
+        <!-- Formulário para registrar CPFs e códigos de barras -->
+        <div id="registration">
+            <label for="barcode">Código de Barras:</label>
+            <input type="text" id="barcode" placeholder="Digite o código de barras">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" placeholder="Digite o CPF">
+            <button onclick="registerCard()">Registrar</button>
+        </div>
+
+        <h2>Estatísticas das Cartelas</h2>
+        <button onclick="fetchStatistics()">Atualizar Estatísticas</button>
+
+        <div id="statistics">
+            <h3>CPFs e Quantidade de Cartelas</h3>
+            <table id="cpf-table">
+                <thead>
+                    <tr>
+                        <th>CPF</th>
+                        <th>Quantidade de Cartelas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão preenchidos via JavaScript -->
+                </tbody>
+            </table>
+
+            <h3>CPFs com Mais Cartelas Completas</h3>
+            <table id="completed-table">
+                <thead>
+                    <tr>
+                        <th>CPF</th>
+                        <th>Cartelas Completas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão preenchidos via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function registerCard() {
+            const barcode = document.getElementById('barcode').value;
+            const cpf = document.getElementById('cpf').value;
+
+            fetch('http://your-server-address/api/register-card', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ barcode, cpf }),
+            }).then(response => response.json())
+              .then(data => alert('Cartela registrada com sucesso!'))
+              .catch(error => console.error('Erro:', error));
+        }
+
+        function fetchStatistics() {
+            fetch('http://your-server-address/api/statistics')
+                .then(response => response.json())
+                .then(data => {
+                    updateTables(data);
+                })
+                .catch(error => console.error('Erro:', error));
+        }
+
+        function updateTables(data) {
+            // Atualizar tabela de CPFs e Quantidade de Cartelas
+            const cpfTableBody = document.getElementById('cpf-table').getElementsByTagName('tbody')[0];
+            cpfTableBody.innerHTML = ''; // Limpa a tabela
+            data.cpfStatistics.forEach(stat => {
+                const row = cpfTableBody.insertRow();
+                row.insertCell(0).textContent = stat.cpf;
+                row.insertCell(1).textContent = stat.cartelas;
+            });
+
+            // Atualizar tabela de CPFs com Mais Cartelas Completas
+            const completedTableBody = document.getElementById('completed-table').getElementsByTagName('tbody')[0];
+            completedTableBody.innerHTML = ''; // Limpa a tabela
+            data.completedStatistics.forEach(stat => {
+                const row = completedTableBody.insertRow();
+                row.insertCell(0).textContent = stat.cpf;
+                row.insertCell(1).textContent = stat.completed;
+            });
+        }
+
+        // Inicializa a página com as estatísticas
+        fetchStatistics();
+    </script>
+</body>
+</html>

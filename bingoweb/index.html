@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Definição do conjunto de caracteres da página -->
+    <meta charset="UTF-8">
+    <!-- Configuração da viewport para responsividade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página -->
+    <title>Página Inicial</title>
+    
+    <!-- Inclusão do favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Estilo do corpo da página */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928DAB); /* Fundo com gradiente */
+            color: #fff; /* Texto em branco */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altura da tela completa */
+            text-align: center; /* Centralização do texto */
+        }
+
+        /* Estilo do contêiner principal */
+        .container {
+            background: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
+            border-radius: 15px; /* Bordas arredondadas */
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+        }
+
+        /* Estilo do título */
+        h1 {
+            margin: 0 0 20px;
+            font-size: 2.5rem;
+        }
+
+        /* Estilo dos botões */
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 1.2rem;
+            color: #fff;
+            background: linear-gradient(135deg, #ff0081, #ff8c00); /* Gradiente no botão */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s; /* Animação no hover */
+        }
+
+        /* Estilo dos botões no hover */
+        .button:hover {
+            background: linear-gradient(135deg, #ff0081, #ff5722); /* Mudança de cor no hover */
+            transform: scale(1.05); /* Leve aumento de tamanho */
+        }
+
+        /* Estilo dos ícones dentro dos botões */
+        .button img {
+            width: 24px; /* Tamanho do ícone */
+            vertical-align: middle;
+            margin-right: 8px; /* Espaço entre ícone e texto */
+        }
+
+        /* Estilo da descrição */
+        .description {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Estilo do logo */
+        .logo {
+            max-width: 150px; /* Largura máxima do logo */
+            margin-bottom: 20px; /* Espaço abaixo do logo */
+        }
+    </style>
+</head>
+<body>
+    <!-- Contêiner principal -->
+    <div class="container">
+        <!-- Logo da aplicação -->
+        <img src="images/ticket.png" alt="Logo" class="logo">
+        <!-- Título de boas-vindas -->
+        <h1>Bem-vindo ao Jogo de Bingo!</h1>
+        <!-- Descrição breve -->
+        <p class="description">Escolha uma opção abaixo para começar:</p>
+        
+        <!-- Botão para a página de configurações -->
+        <a href="config.html" class="button">
+            <img src="images/settings.png" alt="Configuração"> <!-- Ícone do botão -->
+            Configurações
+        </a>
+        
+        <!-- Botão para a página de geração de cartelas -->
+        <a href="cartelas.html" class="button">
+            <img src="images/cartela.png" alt="Cartelas"> <!-- Ícone do botão -->
+            Gerar Cartelas
+        </a>
+        
+        <!-- Botão para a página de sorteios -->
+        <a href="sorteio.html" class="button">
+            <img src="images/bingo.png" alt="Sorteio"> <!-- Ícone do botão -->
+            Área de Sorteios
+        </a>
+    </div>
+	<script src="js/script.js"></script>
+</body>
+</html>

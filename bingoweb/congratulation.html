@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Parabéns!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+		
+	 /* Estilização dos inputs e botões */
+        #controls input, #controls button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilização dos botões de impressão e home */
+        #print-button, #home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+	 /* Estilização específica do botão Home */
+        #home-button {
+            background-color: #2196F3; /* Cor diferente para o botão Home */
+        }
+    
+		
+		
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Parabéns!</h1>
+        <p>O bingo foi concluído com sucesso.</p>
+        <button id="restart-button">Reiniciar Bingo</button>
+		<a href="index.html" id="home-button">Home</a> <!-- Botão Home -->
+    </div>
+
+    <script>
+        document.getElementById('restart-button').addEventListener('click', () => {
+            window.location.href = 'sorteio.html'; // Redireciona para a página principal do bingo
+        });
+    </script>
+</body>
+</html>

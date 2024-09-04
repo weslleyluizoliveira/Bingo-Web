@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Status das Cartelas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Status das Cartelas</h1>
+
+        <!-- Formulário para visualizar status -->
+        <div id="status">
+            <label for="cpf-status">CPF:</label>
+            <input type="text" id="cpf-status" placeholder="Digite o CPF">
+            <button onclick="fetchStatus()">Ver Status</button>
+        </div>
+
+        <h2>Status da Cartela</h2>
+        <div id="status-results">
+            <p id="status-message"></p>
+            <ul id="missing-numbers">
+                <!-- Números faltantes serão preenchidos aqui -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function fetchStatus() {
+            const cpf = document.getElementById('cpf-status').value;
+
+            fetch(`http://your-server-address/api/status/${cpf}`)
+                .then(response => response.json())
+                .then(data => {
+                    updateStatus(data);
+                })
+                .catch(error => console.error('Erro:', error));
+        }
+
+        function updateStatus(data) {
+            const message = document.getElementById('status-message');
+            const missingNumbers = document.getElementById('missing-numbers');
+            missingNumbers.innerHTML = '';
+
+            if (data.success) {
+                message.textContent = `Você ainda precisa marcar os seguintes números:`;
+                data.missingNumbers.forEach(number => {
+                    const li = document.createElement('li');
+                    li.textContent = number;
+                    missingNumbers.appendChild(li);
+                });
+            } else {
+                message.textContent = `Nenhuma cartela encontrada para o CPF fornecido.`;
+            }
+        }
+    </script>
+</body>
+</html>

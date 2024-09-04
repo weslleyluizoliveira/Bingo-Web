@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Configurações</title>    
+	<style>
+		/* Estilos para a página de configurações */
+.settings-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.setting {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+input[type="range"] {
+    margin-left: 10px;
+    width: 100px;
+}
+
+#background-music-volume-label,
+#ball-roll-sound-volume-label {
+    margin-left: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+	 /* Estilização dos inputs e botões */
+        #controls input, #controls button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilização dos botões de impressão e home */
+        #print-button, #home-button {
+            margin-top: 20px;
+            padding: 9px 20px;
+            font-size: 18px;
+            background-color: #007bff;;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+	 /* Estilização específica do botão Home */
+        #home-button {
+            background-color: #007bff;; /* Cor diferente para o botão Home */
+        }
+    
+	</style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1>Configurações</h1>
+        <div class="setting">
+            <label for="sound-toggle">Ativar Som:</label>
+            <input type="checkbox" id="sound-toggle" checked>
+        </div>
+        <div class="setting">
+            <label for="background-music-volume">Volume da Música de Fundo:</label>
+            <input type="range" id="background-music-volume" min="0" max="100" value="10">
+            <span id="background-music-volume-label">10%</span>
+        </div>
+        <div class="setting">
+            <label for="ball-roll-sound-volume">Volume do Som do Sorteio:</label>
+            <input type="range" id="ball-roll-sound-volume" min="0" max="100" value="100">
+            <span id="ball-roll-sound-volume-label">100%</span>
+        </div>
+        <button id="save-settings">Salvar Configurações</button>
+        <button id="back-to-game">Voltar ao Jogo</button>
+		<a href="index.html" id="home-button">Home</a> <!-- Botão Home -->
+    </div>
+    <script src="js/config.js"></script>
+</body>
+</html>

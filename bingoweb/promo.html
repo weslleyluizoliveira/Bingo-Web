@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Cartela Especial de Bingo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            position: relative;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background-image: url('background.jpg'); /* Fundo personalizado */
+            background-size: cover;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-areas: 
+                "cartela1 cartela2"
+                "cartela3 cartela4"
+                "ad ad";
+            grid-gap: 20px;
+        }
+        .bingo-card {
+            position: relative;
+            width: 95mm; /* Tamanho reduzido da cartela */
+            height: 95mm;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .bingo-card table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+        }
+        .bingo-card th, .bingo-card td {
+            border: 1px solid #333;
+            text-align: center;
+            font-size: 14px;
+            padding: 0; /* Remove padding */
+            width: 19%; /* Cada célula ocupa 19% da largura total */
+            height: 19%; /* Cada célula ocupa 19% da altura total */
+        }
+        .bingo-card th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .ad-space {
+            grid-area: ad;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+        .code {
+            font-size: 12px;
+            text-align: right;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cartela Especial de Bingo</h1>
+    <div class="container">
+        <!-- Quatro cartelas 5x5 com espaço para código -->
+        <div class="bingo-card">
+            <table>
+                <thead>
+                    <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+                </thead>
+                <tbody id="cartela-1">
+                    <!-- Números serão inseridos aqui -->
+                </tbody>
+            </table>
+            <div class="code" id="code-1"></div>
+        </div>
+        <div class="bingo-card">
+            <table>
+                <thead>
+                    <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+                </thead>
+                <tbody id="cartela-2">
+                    <!-- Números serão inseridos aqui -->
+                </tbody>
+            </table>
+            <div class="code" id="code-2"></div>
+        </div>
+        <div class="bingo-card">
+            <table>
+                <thead>
+                    <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+                </thead>
+                <tbody id="cartela-3">
+                    <!-- Números serão inseridos aqui -->
+                </tbody>
+            </table>
+            <div class="code" id="code-3"></div>
+        </div>
+        <div class="bingo-card">
+            <table>
+                <thead>
+                    <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+                </thead>
+                <tbody id="cartela-4">
+                    <!-- Números serão inseridos aqui -->
+                </tbody>
+            </table>
+            <div class="code" id="code-4"></div>
+        </div>
+
+        <!-- Espaço para publicidade -->
+        <div class="ad-space">
+            <p>Espaço para Publicidade</p>
+            <!-- Você pode adicionar imagens ou textos publicitários aqui -->
+        </div>
+    </div>
+
+    <script>
+        // Função para gerar números de 1 a 75 para preencher as cartelas
+        function generateNumbers() {
+            const columns = [
+                getRandomNumbers(1, 15),
+                getRandomNumbers(16, 30),
+                getRandomNumbers(31, 45),
+                getRandomNumbers(46, 60),
+                getRandomNumbers(61, 75)
+            ];
+
+            return columns;
+        }
+
+        // Gera números aleatórios e únicos para cada coluna
+        function getRandomNumbers(min, max) {
+            const numbers = [];
+            while (numbers.length < 5) {
+                const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                if (!numbers.includes(num)) {
+                    numbers.push(num);
+                }
+            }
+            return numbers;
+        }
+
+        // Preenche as cartelas com números
+        function fillCartelas() {
+            const cartelas = ['cartela-1', 'cartela-2', 'cartela-3', 'cartela-4'];
+            cartelas.forEach(cartelaId => {
+                const tbody = document.getElementById(cartelaId);
+                const numbers = generateNumbers();
+                for (let i = 0; i < 5; i++) {
+                    const row = document.createElement('tr');
+                    for (let j = 0; j < 5; j++) {
+                        const cell = document.createElement('td');
+                        if (i === 2 && j === 2) {
+                            cell.textContent = 'FREE';
+                        } else {
+                            cell.textContent = numbers[j][i];
+                        }
+                        row.appendChild(cell);
+                    }
+                    tbody.appendChild(row);
+                }
+            });
+        }
+
+        // Gera um código único para a cartela
+        function generateCartelaCode() {
+            return Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        // Insere os códigos nas cartelas
+        function insertCodes() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`code-${i}`).textContent = `Código: ${generateCartelaCode()}`;
+            }
+        }
+
+        // Preencher as cartelas e inserir os códigos ao carregar a página
+        fillCartelas();
+        insertCodes();
+    </script>
+</body>
+</html>

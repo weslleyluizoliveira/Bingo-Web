@@ -1,0 +1,6 @@
+Organizar Arquivos de Áudio: 
+
+Coloque os arquivos de áudio correspondentes a cada número na pasta audio. 
+
+Nomeie os arquivos de acordo com a convenção l
+etter-number.mp3, por exemplo, B-1.mp3, I-16.mp3, etc.

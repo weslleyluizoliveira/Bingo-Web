@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<title>BINGO Web</title>
+	<link rel="stylesheet" href="css/styles.css">
+	
+	<style>
+        #audio-prompt {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #audio-prompt button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="fundo-music" src="audio/fundo.mp3" loop></audio>
+    <div id="audio-prompt">
+        <p>Por favor, ative o áudio para continuar ouvindo a música de fundo.</p>
+        <button id="enable-audio">Ativar Áudio</button>
+    </div>
+
+	<div class="game-container">
+    <h1>BINGO WEB 2024</h1>
+    <div id="bingo-balls" class="bingo-balls"></div>
+    <div id="current-number" class="current-number">NENHUM NÚMERO SORTEADO AINDA!<br>VAMOS COMEÇÃR O JOGO!!</div>
+    
+    <!-- Aplicação da classe comum -->
+    
+    <div id="remaining-numbers" class="number-container"></div>
+
+    <button onclick="playAudio()" id="draw-button">Sortear Próximo Número</button>
+    <button id="finish-button">Finalizar BINGO</button>
+	
+</div>
+
+	
+	<!-- Elementos de Áudio -->
+	<!-- Áudio de fundo que será tocado em loop -->
+   <audio id="fundo-music" >
+   <source src="fundo.mp3" type="audio/mpeg" loop autoplay> Seu navegador não possui o elemento audio</audio>
+	<audio id="bola-music" src="audio/bola.mp3"></audio> 
+	<script>
+		function playAudio(){
+			let x = document.getElementById("fundo-music");
+			x.play();		
+		}
+	
+	</script>
+	
+	<script src="js/script.js"></script>
+</body>
+</html>
+
+
