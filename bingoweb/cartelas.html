@@ -1,228 +1,101 @@
 <!DOCTYPE html>
-<html lang="pt"> <!-- Define o tipo de documento como HTML5 e a língua como português -->
+<html lang="pt">
 <head>
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para garantir a responsividade em dispositivos móveis -->
-    <title>Gerador de Cartelas de Bingo</title> <!-- Define o título da página -->
-
-    <!-- Adiciona um ícone para a aba do navegador (favicon) -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon"> <!-- O arquivo "favicon.ico" deve estar na mesma pasta que o HTML -->
-
-    <style>
-        /* Estilização geral do corpo da página */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Estilização do contêiner central */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilização do título principal */
-        h1 {
-            color: #333;
-        }
-
-        /* Estilização das cartelas de bingo */
-        .bingo-card {
-            display: inline-block;
-            margin: 20px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 10px;
-            background-color: #fff;
-            position: relative;
-        }
-
-        /* Estilização do campo de publicidade */
-        .bingo-card .advertisement {
-            width: 100%;
-            height: 50px;
-            background-color: #f4f4f4;
-            border-bottom: 2px solid #333;
-            text-align: center;
-            line-height: 50px;
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        /* Estilização das tabelas das cartelas de bingo */
-        .bingo-card table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        /* Estilização das células e cabeçalhos das tabelas */
-        .bingo-card th, .bingo-card td {
-            border: 1px solid #333;
-            padding: 0;
-            text-align: center;
-            font-size: 18px;
-            width: 50px; /* Define a largura da célula */
-            height: 50px; /* Define a altura da célula */
-        }
-
-        /* Estilização dos cabeçalhos das colunas */
-        .bingo-card th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        /* Estilização da logo no centro das cartelas */
-        .logo {
-            width: 50px;
-            height: 50px;
-        }
-
-        /* Estilização do contêiner dos controles */
-        #controls {
-            margin-bottom: 20px;
-        }
-
-        /* Estilização dos inputs e botões */
-        #controls input, #controls button {
-            padding: 10px;
-            margin: 5px;
-            font-size: 16px;
-        }
-
-        /* Estilização dos botões de impressão e home */
-        #print-button, #home-button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        /* Estilização específica do botão Home */
-        #home-button {
-            background-color: #2196F3; /* Cor diferente para o botão Home */
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Cartelas de Bingo</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/cartelas.css"> <!-- Referencie o arquivo CSS se necessário -->
 </head>
 <body>
     <div class="container">
-        <h1>Gerador de Cartelas de Bingo</h1> <!-- Título principal da página -->
+        <h1>Gerador de Cartelas de Bingo</h1>
 
         <!-- Controles de geração de cartelas -->
         <div id="controls">
-            <label for="size">Tamanho da Cartela:</label> <!-- Rótulo para o seletor de tamanho -->
-            <select id="size"> <!-- Seleção do tamanho da cartela -->
-                <option value="3">3x3</option> <!-- Opção para cartela 3x3 -->
-                <option value="5" selected>5x5</option> <!-- Opção padrão para cartela 5x5 -->
-                <option value="7">7x7</option> <!-- Opção para cartela 7x7 -->
-            </select>
+            <!-- Seção para mensagem de publicidade -->
+            <div class="control-group">
+                <label for="advertisement">Sua Publicidade</label>
+                <input type="text" id="advertisement" placeholder="Digite sua mensagem de publicidade aqui...">
+            </div>
 
-            <label for="quantity">Quantidade de Cartelas:</label> <!-- Rótulo para o campo de quantidade -->
-            <input type="number" id="quantity" value="1" min="1" max="500"> <!-- Input para quantidade de cartelas -->
+            <!-- Seção para tamanho da cartela -->
+            <div class="control-group">
+                <label for="size">Tamanho da Cartela:</label>
+                <select id="size">
+                    <option value="3">3x3</option>
+                    <option value="5" selected>5x5</option>
+                    <option value="7">7x7</option>
+                </select>
+            </div>
 
-            <label for="advertisement">Mensagem de Publicidade:</label> <!-- Rótulo para o campo de publicidade -->
-            <input type="text" id="advertisement" placeholder="Digite sua mensagem de publicidade aqui..."> <!-- Input para mensagem de publicidade -->
+            <!-- Seção para quantidade de cartelas -->
+            <div class="control-group">
+                <label for="quantity">Quantidade de Cartelas:</label>
+                <input type="number" id="quantity" value="1" min="1" max="500">
+            </div>
 
-            <button onclick="generateBingoCards()">Gerar Cartelas</button> <!-- Botão para gerar cartelas -->
+            <!-- Seção para cor do texto da publicidade -->
+            <div class="control-group">
+                <label for="ad-text-color">Cor do Texto da Publicidade:</label>
+                <input type="color" id="ad-text-color" value="#333333">
+            </div>
+
+            <!-- Seção para cor de fundo da cartela -->
+            <div class="control-group">
+                <label for="card-background-color">Cor de Fundo da Cartela:</label>
+                <input type="color" id="card-background-color" value="#ffffff">
+            </div>
+
+            <!-- Seção para cor de fundo da publicidade -->
+            <div class="control-group">
+                <label for="ad-background-color">Cor de Fundo da Publicidade:</label>
+                <input type="color" id="ad-background-color" value="#f4f4f4">
+            </div>
+
+            <!-- Seção para cor da borda da publicidade -->
+            <div class="control-group">
+                <label for="ad-border-color">Cor da Borda da Publicidade:</label>
+                <input type="color" id="ad-border-color" value="#333333">
+            </div>
+
+            <!-- Seção para cor de fundo do cabeçalho -->
+            <div class="control-group">
+                <label for="header-background-color">Cor de Fundo do Cabeçalho:</label>
+                <input type="color" id="header-background-color" value="#4CAF50">
+            </div>
+
+            <!-- Seção para cor do texto do cabeçalho -->
+            <div class="control-group">
+                <label for="header-text-color">Cor do Texto do Cabeçalho:</label>
+                <input type="color" id="header-text-color" value="#333">
+            </div>
+
+            <!-- Seção para cor da borda das células -->
+            <div class="control-group">
+                <label for="cell-border-color">Cor da Borda das Células:</label>
+                <input type="color" id="cell-border-color" value="#333333">
+            </div>
+
+            <!-- Seção para cor do texto das células -->
+            <div class="control-group">
+                <label for="cell-text-color">Cor do Texto das Células:</label>
+                <input type="color" id="cell-text-color" value="#000000">
+            </div>
         </div>
 
-        <div id="cards-container"></div> <!-- Contêiner para as cartelas geradas -->
+        <!-- Botões de ação -->
+        <div id="controls-actions">
+            <button id="gera-cartelas" onclick="generateBingoCards()">Gerar Cartelas</button>
+            <a href="index.html" id="home-button">Home</a>
+            <button id="print-button" onclick="window.print()">Imprimir Cartelas</button>
+        </div>
 
-        <a href="index.html" id="home-button">Home</a> <!-- Botão Home -->
-
-        <button id="print-button" onclick="window.print()">Imprimir Cartelas</button> <!-- Botão para imprimir as cartelas -->
+        <!-- Área para exibir as cartelas -->
+        <div id="cards-container"></div>
     </div>
 
-    <script>
-        // Função para gerar as cartelas de bingo
-        function generateBingoCards() {
-            const size = parseInt(document.getElementById('size').value);
-            const quantity = parseInt(document.getElementById('quantity').value);
-            const advertisement = document.getElementById('advertisement').value;
-            const container = document.getElementById('cards-container');
-            container.innerHTML = ''; // Limpa as cartelas anteriores
-
-            for (let q = 0; q < quantity; q++) {
-                const card = document.createElement('div');
-                card.className = 'bingo-card';
-
-                // Adiciona a seção de publicidade
-                const adSection = document.createElement('div');
-                adSection.className = 'advertisement';
-                adSection.textContent = advertisement || 'Publicidade Aqui'; // Mensagem padrão se o campo estiver vazio
-                card.appendChild(adSection);
-
-                const table = document.createElement('table');
-                const thead = document.createElement('thead');
-                const tbody = document.createElement('tbody');
-
-                const headerRow = document.createElement('tr');
-                ['B', 'I', 'N', 'G', 'O'].forEach(letter => {
-                    const th = document.createElement('th');
-                    th.textContent = letter;
-                    headerRow.appendChild(th);
-                });
-                thead.appendChild(headerRow);
-
-                const numbers = generateNumbers(size);
-
-                for (let i = 0; i < size; i++) {
-                    const row = document.createElement('tr');
-                    for (let j = 0; j < 5; j++) { // 5 colunas (BINGO)
-                        const cell = document.createElement('td');
-                        if (size === 5 && i === 2 && j === 2) {
-                            // No padrão 5x5, a célula do centro é livre
-                            cell.innerHTML = '<img src="images/logo.png" alt="Logo" class="logo">';
-                        } else {
-                            cell.textContent = numbers[j][i];
-                        }
-                        row.appendChild(cell);
-                    }
-                    tbody.appendChild(row);
-                }
-
-                table.appendChild(thead);
-                table.appendChild(tbody);
-                card.appendChild(table);
-                container.appendChild(card);
-            }
-        }
-
-        // Função para gerar números aleatórios para as cartelas
-        function generateNumbers(size) {
-            const columns = [
-                getRandomNumbers(1, 15, size),
-                getRandomNumbers(16, 30, size),
-                getRandomNumbers(31, 45, size),
-                getRandomNumbers(46, 60, size),
-                getRandomNumbers(61, 75, size),
-            ];
-
-            return columns;
-        }
-
-        // Função auxiliar para gerar números aleatórios sem repetição
-        function getRandomNumbers(min, max, count) {
-            const numbers = [];
-            while (numbers.length < count) {
-                const num = Math.floor(Math.random() * (max - min + 1)) + min;
-                if (!numbers.includes(num)) {
-                    numbers.push(num);
-                }
-            }
-            return numbers;
-        }
-    </script>
+    <!-- Referência ao arquivo JavaScript externo -->
+    <script src="js/cartelas.js"></script>
 </body>
 </html>
