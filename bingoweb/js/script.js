@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('O jogo foi finalizado.'); // Mostra um alerta indicando que o jogo foi finalizado
         drawnNumbers = []; // Limpa a lista de números sorteados
         ballsContainer.innerHTML = ''; // Limpa o contêiner de bolas
-        currentNumberDiv.innerHTML = 'NENHUM NÚMERO SORTEADO AINDA!<br>VAMOS COMEÇAR O JOGO!!'; // Reseta o texto do número atual
+        currentNumberDiv.innerHTML = 'VAMOS COMEÇAR O JOGO!!'; // Reseta o texto do número atual
         currentNumberDiv.classList.remove('reveal'); // Remove a classe de animação de revelação
         updateRemainingNumbers(); // Atualiza a lista de números restantes
         drawButton.disabled = false; // Reabilita o botão de sorteio
