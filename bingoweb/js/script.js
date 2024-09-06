@@ -1,15 +1,15 @@
+// Aguarda o carregamento completo do conteúdo do DOM antes de executar o código
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtém referências aos elementos HTML que serão manipulados
-    const ballsContainer = document.getElementById('bingo-balls');
-    const currentNumberDiv = document.getElementById('current-number');
-    const numberListDiv = document.getElementById('number-list');
-    const remainingNumbersDiv = document.getElementById('remaining-numbers');
-    const drawButton = document.getElementById('draw-button');
-    const finishButton = document.getElementById('finish-button');
-    const backgroundMusic = document.getElementById('fundo-music');
-    const ballRollSound = document.getElementById('bola-music');
+    // Seleciona elementos do DOM que serão manipulados
+    const ballsContainer = document.getElementById('bingo-balls'); // Contêiner onde as bolas de bingo serão exibidas
+    const currentNumberDiv = document.getElementById('current-number'); // Elemento onde o número sorteado será mostrado
+    const remainingNumbersDiv = document.getElementById('remaining-numbers'); // Elemento onde os números restantes serão listados
+    const drawButton = document.getElementById('draw-button'); // Botão para sortear um número
+    const finishButton = document.getElementById('finish-button'); // Botão para finalizar o jogo
+    const backgroundMusic = document.getElementById('fundo-music'); // Elemento de áudio para a música de fundo
+    const ballRollSound = document.getElementById('bola-music'); // Elemento de áudio para o som das bolas
 
-    // Define a lista completa de números disponíveis para o jogo
+    // Lista de todos os números possíveis no bingo, com suas respectivas letras
     const numbers = [
         {letter: 'B', number: 1}, {letter: 'B', number: 2}, {letter: 'B', number: 3}, {letter: 'B', number: 4}, {letter: 'B', number: 5},
         {letter: 'B', number: 6}, {letter: 'B', number: 7}, {letter: 'B', number: 8}, {letter: 'B', number: 9}, {letter: 'B', number: 10},
@@ -28,117 +28,90 @@ document.addEventListener('DOMContentLoaded', () => {
         {letter: 'O', number: 71}, {letter: 'O', number: 72}, {letter: 'O', number: 73}, {letter: 'O', number: 74}, {letter: 'O', number: 75}
     ];
 
+    // Array para armazenar os números que já foram sorteados
     let drawnNumbers = [];
-    let availableNumbers = [...numbers];
 
-    // Função para aplicar configurações de som salvas
-    function applySettings() {
-    const savedSettings = JSON.parse(localStorage.getItem('settings')) || {};
-
-    // Aplica as configurações de som
-    if (savedSettings.sound === false) {
-        backgroundMusic.volume = 0;
-        ballRollSound.volume = 0;
-    } else {
-        backgroundMusic.volume = savedSettings.backgroundMusicVolume / 100;
-        ballRollSound.volume = savedSettings.ballRollSoundVolume / 100;
+    // Função para obter um número aleatório que ainda não foi sorteado
+    function getRandomNumber() {
+        let index;
+        // Gera um índice aleatório até encontrar um número não sorteado
+        do {
+            index = Math.floor(Math.random() * numbers.length);
+        } while (drawnNumbers.includes(numbers[index]));
+        return numbers[index];
     }
 
-    // Garante que o áudio de fundo comece a tocar
-    backgroundMusic.play().catch(error => {
-        console.log('Erro ao tentar tocar o áudio de fundo:', error);
-    });
-}
-
-    // Função para tocar o áudio do número sorteado
-    function playNumberAudio(number) {
-        const audio = new Audio(`audio/${number.letter}-${number.number}.mp3`);
-        
-        audio.addEventListener('error', () => {
-            console.log(`Áudio para ${number.letter}${number.number} não encontrado. Reproduzindo som padrão.`);
-            ballRollSound.play(); // Reproduz o som padrão se o áudio específico não for encontrado
-        });
-
-        audio.play();
-    }
-
-    // Função para sortear um número
+    // Função para sortear um número e atualizar a interface
     function drawNumber() {
-        if (availableNumbers.length === 0) {
-            alert('Todos os Números já foram Sorteados!');
-            return;
-        }
+        const num = getRandomNumber(); // Obtém um número aleatório
+        drawnNumbers.push(num); // Adiciona o número sorteado à lista de números sorteados
 
-        ballRollSound.play();
+        // Adiciona uma classe de animação placeholder antes de revelar o número
+        currentNumberDiv.classList.add('animation-placeholder');
 
-        const ballPlaceholder = document.createElement('div');
-        ballPlaceholder.classList.add('ball');
-        ballPlaceholder.textContent = '...';
-        ballsContainer.appendChild(ballPlaceholder);
-
+        // Mostrar o número após um atraso
         setTimeout(() => {
-            ballsContainer.removeChild(ballPlaceholder);
+            currentNumberDiv.classList.remove('animation-placeholder'); // Remove a classe de animação placeholder
+            currentNumberDiv.classList.add('reveal'); // Adiciona a classe de animação de revelação
+            currentNumberDiv.innerHTML = `${num.letter}${num.number}`; // Atualiza o texto com o número sorteado
+            
+            // Cria um novo elemento para a bola sorteada e adiciona ao contêiner de bolas
+            const ball = document.createElement('div');
+            ball.classList.add('ball');
+            ball.textContent = `${num.letter}${num.number}`;
+            ballsContainer.appendChild(ball);
 
-            const index = Math.floor(Math.random() * availableNumbers.length);
-            const number = availableNumbers.splice(index, 1)[0];
-
-            drawnNumbers.push(number);
-
-            const newBall = document.createElement('div');
-            newBall.classList.add('ball');
-            newBall.textContent = `${number.letter}${number.number}`;
-            ballsContainer.appendChild(newBall);
-
-            removeNumberFromRemaining(number);
-
-            currentNumberDiv.textContent = `NÚMERO SORTEADO: ${number.letter}${number.number}`;
-
-            updateNumberList();
-            updateRemainingNumbers();
-
-            // Toca o áudio específico do número sorteado
-            playNumberAudio(number);
-
-        }, 1000);
+            // Desabilita o botão de sorteio se todos os números foram sorteados
+            if (drawnNumbers.length === numbers.length) {
+                drawButton.disabled = true;
+            }
+            updateRemainingNumbers(); // Atualiza a lista de números restantes
+            playAudio(); // Reproduz os sons
+        }, 1500); // Define o atraso antes de mostrar o número (em milissegundos)
     }
 
-    function updateNumberList() {
-        numberListDiv.innerHTML = '<h3>NÚMEROS SORTEADOS: <p></h3>';
-        drawnNumbers.forEach(num => {
-            const listItem = document.createElement('div');
-            listItem.textContent = `${num.letter}${num.number}`;
-            numberListDiv.appendChild(listItem);
-        });
-    }
-
+    // Função para atualizar a lista de números restantes
     function updateRemainingNumbers() {
-        remainingNumbersDiv.innerHTML = '<h3> </h3><p><p><p><p>';
-        availableNumbers.forEach(num => {
-            const listItem = document.createElement('div');
-            listItem.textContent = `${num.letter}${num.number}`;
-            listItem.id = `remaining-${num.letter}${num.number}`;
-            remainingNumbersDiv.appendChild(listItem);
+        remainingNumbersDiv.innerHTML = ''; // Limpa o conteúdo atual
+        numbers.forEach(num => {
+            if (!drawnNumbers.includes(num)) { // Verifica se o número ainda não foi sorteado
+                const div = document.createElement('div');
+                div.textContent = `${num.letter}${num.number}`;
+                remainingNumbersDiv.appendChild(div);
+            }
         });
     }
 
-    function removeNumberFromRemaining(number) {
-        const numberId = `remaining-${number.letter}${number.number}`;
-        const numberElement = document.getElementById(numberId);
-
-        if (numberElement) {
-            numberElement.remove();
+    // Função para tocar os sons de fundo e de rotação da bola
+    function playAudio() {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play(); // Toca a música de fundo se não estiver tocando
+        }
+        if (ballRollSound.paused) {
+            ballRollSound.play(); // Toca o som da rotação da bola se não estiver tocando
         }
     }
 
-    function finishBingo() {
-        backgroundMusic.pause();
-        window.location.href = 'congratulation.html';
-    }
-
+    // Adiciona um evento de clique ao botão de sorteio
     drawButton.addEventListener('click', drawNumber);
-    finishButton.addEventListener('click', finishBingo);
 
-    // Inicializa a lista de números restantes e aplica as configurações ao carregar a página
-    applySettings();
+    // Adiciona um evento de clique ao botão de finalizar
+    finishButton.addEventListener('click', () => {
+        alert('O jogo foi finalizado.'); // Mostra um alerta indicando que o jogo foi finalizado
+        drawnNumbers = []; // Limpa a lista de números sorteados
+        ballsContainer.innerHTML = ''; // Limpa o contêiner de bolas
+        currentNumberDiv.innerHTML = 'NENHUM NÚMERO SORTEADO AINDA!<br>VAMOS COMEÇAR O JOGO!!'; // Reseta o texto do número atual
+        currentNumberDiv.classList.remove('reveal'); // Remove a classe de animação de revelação
+        updateRemainingNumbers(); // Atualiza a lista de números restantes
+        drawButton.disabled = false; // Reabilita o botão de sorteio
+    });
+
+    // Adiciona um evento de clique ao botão de ativar áudio
+    document.getElementById('enable-audio').addEventListener('click', () => {
+        backgroundMusic.play(); // Toca a música de fundo
+        document.getElementById('audio-prompt').style.display = 'none'; // Esconde o aviso de áudio
+    });
+
+    // Atualiza a lista de números restantes na inicialização
     updateRemainingNumbers();
 });
