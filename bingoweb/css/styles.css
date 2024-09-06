@@ -1,208 +1,297 @@
+/* Configurações gerais do corpo da página */
 body {
-    font-family: Arial, Sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif; /* Define a fonte padrão */
+    text-align: center; /* Centraliza o texto na página */
+    background-color: #f0f0f0; /* Define a cor de fundo da página */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o padding padrão */
 }
 
+/* Container principal que centraliza o conteúdo e aplica estilos */
 .container {
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 600px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Centraliza o container horizontalmente */
+    padding: 20px; /* Adiciona espaçamento interno */
+    max-width: 1200px; /* Define a largura máxima */
+    height: 900px; /* Define a altura */
+    background: #ffffff; /* Define a cor de fundo do container */
+    border-radius: 8px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra ao redor do container */
 }
 
-.bingo-balls {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
+/* Estilo para o título principal */
 h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 2em; /* Define o tamanho da fonte */
+    margin-bottom: 20px; /* Adiciona margem inferior */
+    color: #333; /* Define a cor do texto */
 }
 
+/* Estilo para o contêiner das bolas de bingo */
+.bingo-balls {
+    display: flex; /* Utiliza flexbox para layout */
+    justify-content: center; /* Centraliza horizontalmente */
+    margin: 20px 0; /* Adiciona margem superior e inferior */
+    flex-wrap: wrap; /* Permite quebra de linha para os itens */
+}
+
+/* Estilo para cada bola de bingo */
 .ball {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #ffcc00;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin: 5px;
-    position: relative;
-    animation: bounce 1s ease-out;
+    width: 60px; /* Define a largura da bola */
+    height: 60px; /* Define a altura da bola */
+    border-radius: 50%; /* Faz a bola ser circular */
+    background-color: #ffcc00; /* Define a cor de fundo da bola */
+    display: flex; /* Utiliza flexbox para alinhamento interno */
+    align-items: center; /* Alinha itens verticalmente no centro */
+    justify-content: center; /* Alinha itens horizontalmente no centro */
+    font-size: 24px; /* Define o tamanho da fonte */
+    margin: 5px; /* Adiciona margem ao redor da bola */
+    position: relative; /* Permite posicionamento relativo */
+    animation: bounce 1s ease-out; /* Adiciona uma animação de pulo */
 }
 
-/* Número sorteado */
+/* Estilo para o número atual sorteado */
 .current-number {
-    font-family: Georgia, serif;
-    font-size: 36px;
-    margin: 20px;
-    color: #ff0000;
-}
-
-.number-list {
-    text-align: left;
-    margin: 20px;
-    display: inline-block;
-    font-size: 18px;
-    color: #555;
-}
-
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-}
-
-/* Estilo comum para os dois divs */
-.number-container {
-    display: flex;
-    flex-direction: column;
-    margin: 30px 0;
-    padding: 30px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    max-height: 600px;
-    overflow-y: auto;
-}
-
-.number-container h3 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    text-align: center;
+    font-family: Montserrat, sans-serif; /* Define a fonte do texto */
+    font-size: 20px; /* Define o tamanho da fonte */
+    margin: 20px; /* Adiciona margem ao redor do número */
+    color: #ff0000; /* Define a cor do texto */
+    font-size: calc(10vw + 10vh); /* Usa unidades de viewport para ajustar o tamanho */
+    font-weight: bold; /* Torna o texto em negrito */
+    margin-bottom: 20px; /* Adiciona margem inferior */
+    height: auto; /* Permite que a altura se ajuste automaticamente */
+    line-height: 1; /* Ajusta a linha para se adaptar ao tamanho do texto */
+    text-align: center; /* Alinha o texto ao centro */
+    position: relative; /* Permite posicionamento relativo */
+    display: flex; /* Utiliza flexbox para alinhamento */
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    justify-content: center; /* Alinha o conteúdo horizontalmente */
+    overflow: hidden; /* Oculta qualquer overflow que ultrapasse os limites */
 }
 
 /* Estilo para a lista de números restantes */
-#remaining-numbers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center; /* Centraliza os itens horizontalmente */
+.number-list {
+    text-align: left; /* Alinha o texto à esquerda */
+    margin: 20px; /* Adiciona margem ao redor da lista */
+    display: inline-block; /* Define que o elemento é um bloco em linha */
+    font-size: 18px; /* Define o tamanho da fonte */
+    color: #555; /* Define a cor do texto */
 }
 
+/* Estilo para botões */
+button {
+    margin: 10px; /* Adiciona margem ao redor do botão */
+    padding: 10px 20px; /* Adiciona espaçamento interno */
+    font-size: 16px; /* Define o tamanho da fonte */
+    color: #fff; /* Define a cor do texto */
+    cursor: pointer; /* Muda o cursor para indicar um botão clicável */
+    border: none; /* Remove a borda padrão */
+    border-radius: 4px; /* Adiciona bordas arredondadas */
+    background-color: #007bff; /* Define a cor de fundo */
+    transition: background-color 0.3s; /* Adiciona uma transição suave na mudança de cor */
+}
+
+/* Estilo para o botão quando o cursor passa por cima */
+button:hover {
+    background-color: #0056b3; /* Muda a cor de fundo ao passar o mouse */
+}
+
+/* Animação de pulo para as bolas */
+@keyframes bounce {
+    0% { transform: translateY(0); } /* Posição inicial */
+    50% { transform: translateY(-10px); } /* Move para cima */
+    100% { transform: translateY(0); } /* Volta à posição inicial */
+}
+
+/* Estilo para o contêiner de números restantes */
+.number-container {
+    display: flex; /* Utiliza flexbox para layout */
+    flex-direction: column; /* Alinha itens na vertical */
+    margin: 5px 0; /* Adiciona margem vertical */
+    padding: 5px; /* Adiciona espaçamento interno */
+    background-color: #314a30; /* Define a cor de fundo (verde musgo) */
+    border-radius: 8px; /* Adiciona bordas arredondadas */
+    max-height: 600px; /* Define a altura máxima */
+    overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+}
+
+/* Estilo para o título dentro do contêiner de números restantes */
+.number-container h3 {
+    margin: 0 0 16px 0; /* Margem inferior */
+    font-size: 18px; /* Tamanho da fonte */
+    text-align: center; /* Alinha o texto ao centro */
+}
+
+/* Estilo para o contêiner dos números restantes */
+#remaining-numbers {
+    display: grid; /* Utiliza grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); /* Define colunas automáticas */
+    gap: 16px; /* Espaçamento entre itens */
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+/* Estilo para cada número restante */
 #remaining-numbers div {
-    padding: 8px;
-    background-color: #fff;
-    border-radius: 4px;
-    font-size: 20px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: 40px; /* Largura fixa para cada número */
-    flex: 1 0 40px; /* Permite que os itens se ajustem */
+    padding: 2px; /* Adiciona espaçamento interno */
+    background-color: #fff; /* Define a cor de fundo */
+    border-radius: 4px; /* Adiciona bordas arredondadas */
+    font-size: 20px; /* Define o tamanho da fonte */
+    text-align: center; /* Alinha o texto ao centro */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao redor */
+    width: 40px; /* Define a largura */
+    flex: 1 0 40px; /* Permite o dimensionamento flexível */
 }
 
-/* Número sorteado em vermelho */
+/* Estilo para números destacados */
 .highlight {
-    color: red; /* Muda a cor do texto para vermelho */
+    color: red; /* Define a cor do texto como vermelho */
 }
 
-/* Media Queries para responsividade */
+/* Estilos responsivos para telas menores */
 @media (max-width: 768px) {
     .ball {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 50px; /* Ajusta a largura das bolas */
+        height: 50px; /* Ajusta a altura das bolas */
+        font-size: 20px; /* Ajusta o tamanho da fonte */
     }
 
-    .current-number {
-        font-size: 30px;
-    }
+    
 
     .number-list {
-        font-size: 16px;
+        font-size: 16px; /* Ajusta o tamanho da fonte */
     }
 
     button {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 8px 16px; /* Ajusta o padding */
+        font-size: 14px; /* Ajusta o tamanho da fonte */
     }
 
     #remaining-numbers div {
-        width: 30px; /* Ajusta a largura dos números restantes */
-        font-size: 16px; /* Ajusta o tamanho da fonte dos números restantes */
+        width: 30px; /* Ajusta a largura */
+        font-size: 16px; /* Ajusta o tamanho da fonte */
     }
 }
 
 @media (max-width: 480px) {
     .ball {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+        width: 40px; /* Ajusta a largura das bolas */
+        height: 40px; /* Ajusta a altura das bolas */
+        font-size: 16px; /* Ajusta o tamanho da fonte */
     }
 
-    .current-number {
-        font-size: 24px;
-    }
+   
 
     .number-list {
-        font-size: 14px;
+        font-size: 14px; /* Ajusta o tamanho da fonte */
     }
 
     button {
-        padding: 6px 12px;
-        font-size: 12px;
+        padding: 6px 12px; /* Ajusta o padding */
+        font-size: 12px; /* Ajusta o tamanho da fonte */
     }
 
     #remaining-numbers div {
-        width: 25px; /* Ajusta ainda mais a largura dos números restantes */
-        font-size: 14px; /* Ajusta o tamanho da fonte dos números restantes */
+        width: 25px; /* Ajusta a largura */
+        font-size: 16px; /* Ajusta o tamanho da fonte */
     }
 }
 
-/* Estilo para a lista de números restantes usando CSS Grid */
-#remaining-numbers {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); /* Ajusta automaticamente para 5 colunas */
-    gap: 16px; /* Espaçamento entre os números */
-    justify-content: center; /* Centraliza os itens horizontalmente */
+/* Estilo para o contêiner principal do artigo */
+#main-article {
+    float: left; /* Alinha o contêiner à esquerda */
+    width: 65%; /* Define a largura do contêiner */
+    min-height: 500px; /* Define a altura mínima */
+    background: #e5e5e5; /* Define a cor de fundo */
 }
 
-/* Ajuste adicional para a responsividade */
-@media (max-width: 768px) {
-    #remaining-numbers {
-        grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); /* Ajusta a largura mínima para colunas menores em telas menores */
-    }
+/* Estilo para o contêiner do corpo principal */
+#main-body-container {
+    padding: 10px; /* Adiciona espaçamento interno */
+    margin: 10px; /* Adiciona margem ao redor */
+}
 
-    #remaining-numbers div {
-        width: 30px; /* Ajusta a largura dos números restantes */
-        font-size: 16px; /* Ajusta o tamanho da fonte dos números restantes */
+/* Estilo para a barra lateral */
+#sidebar {
+    width: 100%; /* Define a largura */
+    padding: 10px; /* Adiciona espaçamento interno */
+    background: #e5e5e5; /* Define a cor de fundo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao redor */
+}
+
+/* Estilo para a segunda barra lateral */
+#sidebar2 {
+    padding: 10px; /* Adiciona espaçamento interno */
+    margin-bottom: 10px; /* Adiciona margem inferior */
+    text-align: center; /* Alinha o texto ao centro */
+    font-weight: bold; /* Torna o texto em negrito */
+}
+
+/* Estilo para o rodapé */
+#footer {
+    width: 100%; /* Define a largura */
+    background-color: black; /* Define a cor de fundo */
+    padding: 10px; /* Adiciona espaçamento interno */
+    color: white; /* Define a cor do texto */
+    text-align: center; /* Alinha o texto ao centro */
+}
+/*------------------------------------------------------*/
+
+
+/* Estilo para o número atual com animação */
+#current-number {
+    font-size: 50px; /* Define o tamanho da fonte */
+    font-weight: bold; /* Torna o texto em negrito */
+    margin-bottom: 0px; /* Adiciona margem inferior */
+    height: 300px; /* Define a altura */
+    line-height: 50px; /* Alinha verticalmente o texto */
+    text-align: center; /* Alinha o texto ao centro */
+    position: relative; /* Permite posicionamento relativo */
+}
+
+/* Animação para revelar o número */
+.reveal {
+    animation: revealAnimation 1s forwards; /* Aplica a animação de revelação */
+}
+
+/* Define a animação de revelação */
+@keyframes revealAnimation {
+    0% {
+        opacity: 0; /* Inicia com opacidade zero */
+        transform: scale(0.5); /* Inicia com escala reduzida */
+    }
+    100% {
+        opacity: 1; /* Termina com opacidade completa */
+        transform: scale(1); /* Termina com escala normal */
     }
 }
 
-@media (max-width: 480px) {
-    #remaining-numbers {
-        grid-template-columns: repeat(auto-fill, minmax(25px, 1fr)); /* Ajusta a largura mínima para colunas menores em telas ainda menores */
-    }
-
-    #remaining-numbers div {
-        width: 25px; /* Ajusta ainda mais a largura dos números restantes */
-        font-size: 14px; /* Ajusta o tamanho da fonte dos números restantes */
-    }
+/* Estilo para os números restantes */
+#remaining-numbers div {
+    margin: 5px 0; /* Adiciona margem vertical */
 }
 
+/* Estilo para o espaço reservado antes da animação */
+.animation-placeholder {
+    height: 20px; /* Define a altura do espaço reservado */
+    line-height: 20px; /* Alinha verticalmente o texto */
+    font-size: 20px; /* Define o tamanho da fonte */
+    text-align: center; /* Alinha o texto ao centro */
+    color: #ccc; /* Define a cor do texto como cinza claro */
+}
+
+
+
+/* Animação para revelar o número */
+.reveal {
+    animation: revealAnimation 1s forwards; /* Aplica a animação de revelação */
+}
+
+/* Define a animação de revelação */
+@keyframes revealAnimation {
+    0% {
+        opacity: 0; /* Inicia com opacidade zero */
+        transform: scale(0.5); /* Inicia com escala reduzida */
+    }
+    100% {
+        opacity: 1; /* Termina com opacidade completa */
+        transform: scale(1); /* Termina com escala normal */
+    }
+}
