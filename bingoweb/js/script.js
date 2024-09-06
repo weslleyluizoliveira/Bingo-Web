@@ -91,20 +91,31 @@ document.addEventListener('DOMContentLoaded', () => {
             ballRollSound.play(); // Toca o som da rotação da bola se não estiver tocando
         }
     }
-
+	
+	// função para a musica e abrir pagina de fim de jogo - b1
+	function finishBingo() {
+        backgroundMusic.pause();
+        window.location.href = 'congratulation.html';
+    }
     // Adiciona um evento de clique ao botão de sorteio
     drawButton.addEventListener('click', drawNumber);
-
-    // Adiciona um evento de clique ao botão de finalizar
-    finishButton.addEventListener('click', () => {
+	// Adiciona um evento de clique ao botão de fim sorteio - b2
+	finishButton.addEventListener('click', finishBingo);
+	
+    // Adiciona um evento de clique ao botão de finalizar apenas uma mesagem na tela e reorganiza para uma nova partida
+	// Apagar o b1 e o b2 caso queira usar esta Função
+	
+   /* finishButton.addEventListener('click', () => {
         alert('O jogo foi finalizado.'); // Mostra um alerta indicando que o jogo foi finalizado
+		backgroundMusic.pause(); // finaliza a musica
         drawnNumbers = []; // Limpa a lista de números sorteados
         ballsContainer.innerHTML = ''; // Limpa o contêiner de bolas
         currentNumberDiv.innerHTML = 'VAMOS COMEÇAR O JOGO!!'; // Reseta o texto do número atual
         currentNumberDiv.classList.remove('reveal'); // Remove a classe de animação de revelação
         updateRemainingNumbers(); // Atualiza a lista de números restantes
         drawButton.disabled = false; // Reabilita o botão de sorteio
-    });
+		
+    });*/
 
     // Adiciona um evento de clique ao botão de ativar áudio
     document.getElementById('enable-audio').addEventListener('click', () => {
