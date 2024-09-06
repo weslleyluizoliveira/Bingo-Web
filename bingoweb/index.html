@@ -23,6 +23,7 @@
             align-items: center;
             height: 100vh; /* Altura da tela completa */
             text-align: center; /* Centralização do texto */
+            overflow: hidden; /* Ocultar a barra de rolagem para um layout mais limpo */
         }
 
         /* Estilo do contêiner principal */
@@ -82,6 +83,11 @@
     </style>
 </head>
 <body>
+    <audio id="player" preload="auto">
+        <source src="audio/game.mp3" type="audio/mp3" />
+        Seu navegador não suporta HTML5.
+    </audio>
+    
     <!-- Contêiner principal -->
     <div class="container">
         <!-- Logo da aplicação -->
@@ -98,17 +104,36 @@
         </a>
         
         <!-- Botão para a página de geração de cartelas -->
-        <a href="cartelas.html" class="button">
+        <a href="cartelas.html" class="button" onclick="playAudio()">
             <img src="images/cartela.png" alt="Cartelas"> <!-- Ícone do botão -->
             Gerar Cartelas
         </a>
         
         <!-- Botão para a página de sorteios -->
-        <a href="sorteio.html" class="button">
+        <a href="sorteio.html" class="button" onclick="playAudio()">
             <img src="images/bingo.png" alt="Sorteio"> <!-- Ícone do botão -->
             Área de Sorteios
         </a>
     </div>
-	<script src="js/script.js"></script>
+    
+    <script>
+        var audio = document.getElementById('player');
+
+        // Função para tocar o áudio
+        function playAudio() {
+            if (audio.paused) {
+                audio.play();
+            }
+        }
+
+        // Adiciona um evento de movimento do mouse para iniciar o áudio
+        document.addEventListener('mousemove', function() {
+            if (audio.paused) {
+                audio.play().catch(function(error) {
+                    console.error("Erro ao tentar tocar o áudio:", error);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
